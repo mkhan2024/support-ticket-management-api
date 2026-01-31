@@ -26,7 +26,8 @@ export const getAllTickets = async (req: Request, res: Response) => {
 
 export const getTicketUrgency = async (req: Request, res: Response) => {
   try {
-    const id = parseInt(req.params.id, 10);
+    const idStr = String(req.params.id); // Fix: cast to string for TS safety
+    const id = parseInt(idStr, 10);
     if (isNaN(id)) {
       return res.status(HTTP_STATUS.BAD_REQUEST).json({ message: 'Invalid ticket ID' });
     }
